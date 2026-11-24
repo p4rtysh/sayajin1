@@ -34,18 +34,23 @@ public class Aluno {
         this.notaTrabalho = notaTrabalho;
     }
 
-    public double media(){
+    public double mediaPonderada(){
         double[] notas = {this.notaProva1, this.notaProva2, this.notaTrabalho};
-        double resultado = 0;
-        for (double nota : notas){
-            resultado += nota;
+        double[] pesos = {2.5, 2.5, 2};
+        double somaNotasPonderadas = 0;
+        double somaPesos = 0;
+
+        for(int i = 0; true; i++){
+            somaNotasPonderadas = notas[i] * pesos[i];
+            somaPesos += pesos[i];
+            return somaNotasPonderadas / somaPesos;
         }
-        return resultado / notas.length;
+
     }
 
     public void mediaFinal(){
-        if (this.media() < 4){
-            double calculo = 4 - this.media();
+        if (this.mediaPonderada() < 4){
+            double calculo = 4 - this.mediaPonderada();
             System.out.println("O(a) aluno(a) precisa tirar " + calculo + " na prova final.");
         }else{
             System.out.println("O(a) aluno(a) está aprovado(a).");
